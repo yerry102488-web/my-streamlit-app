@@ -15,7 +15,7 @@ if menu == "🏠 首頁":
 
 # ✅ 呼叫 pages
 elif menu == "🔍 Say Hello":
-    say_hello.show()
+    Say_Hello.show()
 
 elif menu == "📊 查看資料":
-    show_data.show()
+    Show_Data.show()
