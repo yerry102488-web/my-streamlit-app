@@ -5,7 +5,7 @@ st.set_page_config(page_title="我的App", layout="wide")
 
 menu = st.sidebar.radio(
     "📱 功能選單",
-    ["🏠 首頁", "🔍 Say Hello", "📊 查看資料"]
+    ["🏠 首頁", "🔍 MA5_Deviation", "📊 查看資料"]
 )
 
 # ✅ 首頁
