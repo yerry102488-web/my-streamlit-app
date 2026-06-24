@@ -2,10 +2,32 @@ import streamlit as st
 
 st.set_page_config(page_title="我的App", layout="wide")
 
-st.title("🏠 我的 App 首頁")
+# ✅ 側邊欄選單（最推薦🔥）
+menu = st.sidebar.radio(
+    "📱 功能選單",
+    ["🏠 首頁", "🔍 Say Hello", "📊 查看資料"]
+)
 
-st.write("請選擇功能：")
+# ✅ 首頁
+if menu == "🏠 首頁":
+    st.title("🏠 我的 App 首頁")
+    st.write("歡迎使用我的 App 👋")
 
-# ✅ 按鈕式跳頁（安全）
-st.page_link("pages/Say_Hello.py", label="🔍 Say Hello")
-st.page_link("pages/Show_Data.py", label="📊 查看資料")
+# ✅ Say Hello 頁
+elif menu == "🔍 Say Hello":
+    st.title("🔍 Say Hello")
+
+    name = st.text_input("請輸入你的名字")
+
+    if st.button("打招呼"):
+        st.success(f"Hello, {name}! 🎉")
+
+# ✅ 查看資料頁
+elif menu == "📊 查看資料":
+    st.title("📊 查看資料")
+
+    st.write("這裡可以顯示資料")
+
+    # 範例資料
+    data = ["Apple", "Banana", "Cherry"]
+    st.write(data)
