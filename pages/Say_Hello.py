@@ -1,44 +1,32 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
 
 def show():
-    # 標題
-    st.title("🎉 我的第一個 Streamlit 網站")
-    st.write("歡迎使用我的 Web App 🚀")
+    st.title("📊 技術指標計算")
 
-    # 使用者輸入
-    name = st.text_input("請輸入你的名字：")
+    st.write("請輸入 High / Low / MA5")
 
-    if st.button("打招呼"):
-        st.success(f"你好，{name}！很高興見到你 😊")
+    # ✅ 輸入欄位
+    high = st.number_input("High", value=0.0)
+    low = st.number_input("Low", value=0.0)
+    ma5 = st.number_input("MA5", value=1.0)  # 避免除以 0
 
-    # 分隔線
-    st.divider()
+    if st.button("✅ 計算"):
+        if ma5 == 0:
+            st.error("MA5 不能為 0 ❌")
+        else:
+            result1 = (high - ma5) / ma5
+            result2 = (ma5 - low) / ma5
 
-    # 資料顯示
-    st.subheader("📊 隨機資料")
+            st.subheader("📈 計算結果")
 
-    data = pd.DataFrame(
-        np.random.randn(20, 3),
-        columns=['A', 'B', 'C']
-    )
+            st.write(f"(High - MA5) / MA5 = {result1:.4f}")
+            st.write(f"(MA5 - Low) / MA5 = {result2:.4f}")
 
-    st.dataframe(data)
+            # ✅ 視覺化提示
+            if result1 > 0:
+                st.success("價格高於 MA5 ✅")
+            else:
+                st.warning("價格低於或接近 MA5")
 
-    # 圖表
-    st.subheader("📈 折線圖")
-    st.line_chart(data)
-
-    # 側邊欄（⚠️注意這裡）
-    st.sidebar.title("⚙️ 設定")
-
-    rows = st.sidebar.slider("選擇資料筆數", 10, 100, 20)
-
-    new_data = pd.DataFrame(
-        np.random.randn(rows, 2),
-        columns=['X', 'Y']
-    )
-
-    st.subheader("📉 可調整圖表")
-    st.line_chart(new_data)
+            if result2 > 0:
+                st.info("MA5 與 Low 有距離")
