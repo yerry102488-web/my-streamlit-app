@@ -14,8 +14,8 @@ if menu == "🏠 首頁":
     st.write("歡迎使用 App 👋")
 
 # ✅ 呼叫 pages
-elif menu == "🔍 Say Hello":
-    Say_Hello.show()
+elif menu == "🔍 MA5_Deviation":
+    MA5_Deviation.show()
 
 elif menu == "📊 查看資料":
     Show_Data.show()
