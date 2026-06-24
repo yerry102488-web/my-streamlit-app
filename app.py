@@ -1,5 +1,5 @@
 import streamlit as st
-from pages import Say_Hello, Show_Data
+from pages import MA5_Deviation, Show_Data
 
 st.set_page_config(page_title="我的App", layout="wide")
 
