@@ -1,43 +1,50 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
+import os
 
-# 標題
-st.title("🎉 我的第一個 Streamlit 網站")
-st.write("歡迎使用我的 Web App 🚀")
+st.set_page_config(page_title="我的App", layout="wide")
 
-# 使用者輸入
-name = st.text_input("請輸入你的名字：")
+# ✅ 標題
+st.title("📱 我的資料記錄 App")
+st.caption("像 App 一樣的介面 + 可存資料 ✅")
 
-if st.button("打招呼"):
-    st.success(f"你好，{name}！很高興見到你 😊")
+# ✅ 側邊欄（像 App Menu）
+menu = st.sidebar.radio("功能選單", ["➕ 新增資料", "📊 查看資料"])
 
-# 分隔線
-st.divider()
+# ✅ 檔案路徑（用來存資料）
+DATA_FILE = "data.csv"
 
-# 資料顯示
-st.subheader("📊 隨機資料")
+# ✅ 如果沒有檔案就建立
+if not os.path.exists(DATA_FILE):
+    df = pd.DataFrame(columns=["姓名", "年齡", "備註"])
+    df.to_csv(DATA_FILE, index=False)
 
-data = pd.DataFrame(
-    np.random.randn(20, 3),
-    columns=['A', 'B', 'C']
-)
+# ✅ 讀取資料
+df = pd.read_csv(DATA_FILE)
 
-st.dataframe(data)
+# ✅ 功能 1：新增資料
+if menu == "➕ 新增資料":
+    st.subheader("新增資料")
 
-# 圖表
-st.subheader("📈 折線圖")
-st.line_chart(data)
+    name = st.text_input("姓名")
+    age = st.number_input("年齡", 0, 120)
+    note = st.text_area("備註")
 
-# 側邊欄
-st.sidebar.title("⚙️ 設定")
+    if st.button("✅ 儲存"):
+        new_data = pd.DataFrame([[name, age, note]], columns=df.columns)
+        df = pd.concat([df, new_data], ignore_index=True)
+        df.to_csv(DATA_FILE, index=False)
+        st.success("✅ 已成功儲存！")
 
-rows = st.sidebar.slider("選擇資料筆數", 10, 100, 20)
+# ✅ 功能 2：查看資料
+elif menu == "📊 查看資料":
+    st.subheader("所有資料")
 
-new_data = pd.DataFrame(
-    np.random.randn(rows, 2),
-    columns=['X', 'Y']
-)
+    st.dataframe(df, use_container_width=True)
 
-st.subheader("📉 可調整圖表")
-st.line_chart(new_data)
+    st.write(f"總筆數：{len(df)}")
+
+    if st.button("🗑 清空資料"):
+        df = pd.DataFrame(columns=df.columns)
+        df.to_csv(DATA_FILE, index=False)
+        st.warning("資料已清空")
