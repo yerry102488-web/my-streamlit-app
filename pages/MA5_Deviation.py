@@ -34,4 +34,3 @@ def show():
                 st.info("Low 高於 MA5（偏離為正）")
             else:
                 st.warning("Low 低於 MA5（偏離為負）")
-    )
