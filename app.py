@@ -1,10 +1,17 @@
 import streamlit as st
 
+st.set_page_config(page_title="我的App", layout="wide")
+
+# ✅ 標題
 st.title("🏠 我的 App 首頁")
 
-if st.button("🔍 Say Hellow"):
-    st.switch_page("pages/1_Say_Hello.py")
+st.write("請使用左側選單選擇功能 👈")
 
-if st.button("📊 查看資料"):
-    st.switch_page("pages/2_Show_Data.py")
+st.divider()
 
+st.subheader("功能介紹")
+
+st.write("🔍 Say Hello：簡單互動功能")
+st.write("📊 查看資料：顯示資料列表")
+
+st.info("👉 請點左上角 ☰ 打開選單")
