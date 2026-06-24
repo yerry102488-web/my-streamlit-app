@@ -7,5 +7,5 @@ st.title("🏠 我的 App 首頁")
 st.write("請選擇功能：")
 
 # ✅ 按鈕式跳頁（安全）
-st.page_link("pages/1_Say_Hello.py", label="🔍 Say Hello")
-st.page_link("pages/2_Show_Data.py", label="📊 查看資料")
+st.page_link("pages/Say_Hello.py", label="🔍 Say Hello")
+st.page_link("pages/Show_Data.py", label="📊 查看資料")
